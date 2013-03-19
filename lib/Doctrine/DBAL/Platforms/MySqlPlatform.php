@@ -59,6 +59,20 @@ class MySqlPlatform extends AbstractPlatform
     {
         return 'UUID()';
     }
+    
+    /**
+     * Quote a single identifier (no dot chain separation)
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    public function quoteSingleIdentifier($str)
+    {
+        $c = $this->getIdentifierQuoteCharacter();
+
+        return $c . trim(str_replace($c, $c.$c, $str), $c) . $c;
+    }
 
     /**
      * {@inheritDoc}
